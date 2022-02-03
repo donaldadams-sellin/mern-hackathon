@@ -5,6 +5,7 @@ import UserLogOut from '../../components/UserLogOut/UserLogOut';
 import OrderList from '../../components/OrderList/OrderList';
 import { useState, useEffect, useNavigate } from 'react';
 import * as ordersAPI from '../../utilities/orders-api';
+import OrderDetail from '../../components/OrderDetail/OrderDetail';
 
 export default function OrderHistoryPage({ user, setUser }) {
 
@@ -23,7 +24,7 @@ export default function OrderHistoryPage({ user, setUser }) {
     async function getOrders() {
       const orders = await ordersAPI.getOrders();
       setOrders(orders);
-      setSelectedOrder(orders[0]);
+      setSelectedOrder([orders[0]]);
     }
     getOrders();
   }, [])
@@ -37,6 +38,9 @@ export default function OrderHistoryPage({ user, setUser }) {
         <UserLogOut user={user} setUser={setUser} />
       </aside>
       <OrderList selectedOrder={selectedOrder} handleSelect={handleSelect} orders={orders} />
+      <aside>
+        <OrderDetail order={selectedOrder[0]}/>
+      </aside>
     </main>
   );
 }

@@ -13,7 +13,7 @@ export default function OrderListItem({ order, handleSelect, selectedOrder }) {
             </div>
             <div className="align-rt">
                 <div>
-                    {order.orderTotal}
+                    ${order.orderTotal.toFixed(2)}
                 </div>
                 <div className="smaller">
                     {order.totalQty} Items
