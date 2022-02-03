@@ -51,6 +51,10 @@ orderSchema.statics.getCart = function(userId) {
   );
 };
 
+orderSchema.statics.getOrders = function(userId) {
+  return this.find({user: userId, isPaid: true});
+}
+
 orderSchema.methods.addItemToCart = async function(itemId) {
   // 'this' refers to the 'cart' (unpaid order)
   const cart = this;
@@ -76,5 +80,6 @@ orderSchema.methods.setItemQty = function(itemId, newQty) {
   }
   return cart.save();
 }
+
 
 module.exports = mongoose.model('Order', orderSchema);
